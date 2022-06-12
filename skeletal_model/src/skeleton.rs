@@ -5,7 +5,7 @@ use core::ops::Index;
 use daggy::{Dag, EdgeIndex};
 
 pub struct SkeletonConfig {
-    bone_lengths: BoneMap<f32>,
+    pub bone_lengths: BoneMap<f32>,
 }
 
 pub struct Skeleton {
@@ -22,10 +22,12 @@ impl Skeleton {
         // Create root bone: edge (bone) connects to nodes (joints)
         {
             let head = g.add_node(Joint::new());
-            let tail = g.add_node(Joint::new());
-            let bone = Bone::new(BoneKind::Neck, config.bone_lengths[BoneKind::Neck]);
-            let edge = g.add_edge(head, tail, bone).unwrap();
-            bone_map[BoneKind::Neck] = Some(edge);
+            let child = g.add_child(
+                head, 
+                Bone::new(BoneKind::Neck, config.bone_lengths[BoneKind::Neck]), 
+                Joint::new(),
+            );
+            bone_map[BoneKind::Neck] = Some(child.0);
         }
 
         // This closure adds all the immediate children of `parent_bone` to the graph
@@ -37,13 +39,13 @@ impl Skeleton {
                 // No need to work with a ref, `child_kind` is `Copy`
                 let child_kind = child_kind.to_owned();
 
-                let tail = g.add_node(Joint::new());
-                g.add_edge(
+                let child = g.add_child(
                     head,
-                    tail,
                     Bone::new(child_kind, config.bone_lengths[child_kind]),
-                )
-                .unwrap();
+                    Joint::new(),
+                );
+
+                bone_map[child_kind] = Some(child.0);
             }
         };
 
