@@ -23,8 +23,8 @@ impl Skeleton {
         {
             let head = g.add_node(Joint::new());
             let child = g.add_child(
-                head, 
-                Bone::new(BoneKind::Neck, config.bone_lengths[BoneKind::Neck]), 
+                head,
+                Bone::new(BoneKind::Neck, config.bone_lengths[BoneKind::Neck]),
                 Joint::new(),
             );
             bone_map[BoneKind::Neck] = Some(child.0);

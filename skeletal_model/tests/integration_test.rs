@@ -1,8 +1,7 @@
 use skeletal_model::bone::BoneMap;
 use skeletal_model::prelude::*;
-use skeletal_model::Skeleton;
 use skeletal_model::skeleton::SkeletonConfig;
-
+use skeletal_model::Skeleton;
 
 // A minor example showing how the code is supposed to work
 #[test]
