@@ -22,12 +22,12 @@ impl Skeleton {
         // Create root bone: edge (bone) connects to nodes (joints)
         {
             let head = g.add_node(Joint::new());
-            let child = g.add_child(
+            let (edge, _tail) = g.add_child(
                 head,
                 Bone::new(BoneKind::Neck, config.bone_lengths[BoneKind::Neck]),
                 Joint::new(),
             );
-            bone_map[BoneKind::Neck] = Some(child.0);
+            bone_map[BoneKind::Neck] = Some(edge);
         }
 
         // This closure adds all the immediate children of `parent_bone` to the graph
@@ -37,15 +37,15 @@ impl Skeleton {
             let head = g.edge_endpoints(parent_edge).unwrap().1; // Get child node of edge
             for child_kind in parent_bone.children() {
                 // No need to work with a ref, `child_kind` is `Copy`
-                let child_kind = child_kind.to_owned();
+                let child_kind = *child_kind;
 
-                let child = g.add_child(
+                let (edge, _tail) = g.add_child(
                     head,
                     Bone::new(child_kind, config.bone_lengths[child_kind]),
                     Joint::new(),
                 );
 
-                bone_map[child_kind] = Some(child.0);
+                bone_map[child_kind] = Some(edge);
             }
         };
 

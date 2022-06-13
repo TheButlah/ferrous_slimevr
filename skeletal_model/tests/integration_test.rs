@@ -3,9 +3,9 @@ use skeletal_model::prelude::*;
 use skeletal_model::skeleton::SkeletonConfig;
 use skeletal_model::Skeleton;
 
-// A minor example showing how the code is supposed to work
+/// Tests that all lengths of the skeleton are properly initialized based on `SkeletonConfig`
 #[test]
-fn skeleton_test() {
+fn test_lengths() {
     let mut bone_lengths = BoneMap::new([0.; BoneKind::num_types()]);
 
     bone_lengths[BoneKind::FootL] = 4.0;
@@ -14,6 +14,7 @@ fn skeleton_test() {
 
     let skeleton = Skeleton::new(&config);
 
-    assert_eq!(skeleton[BoneKind::FootL].length(), 4.);
-    assert_eq!(skeleton[BoneKind::UpperArmR].length(), 0.);
+    for (i, j) in bone_lengths.iter() {
+        assert_eq!(&skeleton[i].length(), j);
+    }
 }
