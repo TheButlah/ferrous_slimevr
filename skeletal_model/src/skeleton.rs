@@ -4,8 +4,15 @@ use crate::joint::Joint;
 use core::ops::Index;
 use daggy::{Dag, EdgeIndex};
 
+
+/// Used to initialize the [`Skeleton`](crate::skeleton::Skeleton) struct
 pub struct SkeletonConfig {
-    pub bone_lengths: BoneMap<f32>,
+    bone_lengths: BoneMap<f32>,
+}
+impl SkeletonConfig {
+    pub fn new(bone_lengths: BoneMap<f32> ) -> Self {
+        SkeletonConfig { bone_lengths }
+    }
 }
 
 pub struct Skeleton {
@@ -69,5 +76,29 @@ impl Index<BoneKind> for Skeleton {
     fn index(&self, index: BoneKind) -> &Self::Output {
         let edge = self.bone_map[index];
         &self.graph[edge]
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use crate::bone::BoneMap;
+    use crate::prelude::*;
+    use crate::skeleton::SkeletonConfig;
+    use crate::Skeleton;
+
+    /// Tests that all lengths of the skeleton are properly initialized based on `SkeletonConfig`
+    #[test]
+    fn test_lengths() {
+        let mut bone_lengths = BoneMap::new([0.; BoneKind::num_types()]);
+
+        bone_lengths[BoneKind::FootL] = 4.0;
+
+        let config = SkeletonConfig::new(bone_lengths);
+
+        let skeleton = Skeleton::new(&config);
+
+        for (i, j) in bone_lengths.iter() {
+            assert_eq!(&skeleton[i].length(), j);
+        }
     }
 }
