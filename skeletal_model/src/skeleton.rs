@@ -4,13 +4,12 @@ use crate::joint::Joint;
 use core::ops::Index;
 use daggy::{Dag, EdgeIndex};
 
-
-/// Used to initialize the [`Skeleton`](crate::skeleton::Skeleton) struct
+/// Used to initialize the [`Skeleton`](crate::skeleton::Skeleton) with its initial parameters
 pub struct SkeletonConfig {
     bone_lengths: BoneMap<f32>,
 }
 impl SkeletonConfig {
-    pub fn new(bone_lengths: BoneMap<f32> ) -> Self {
+    pub fn new(bone_lengths: BoneMap<f32>) -> Self {
         SkeletonConfig { bone_lengths }
     }
 }
