@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Skeleton",""],["SkeletonConfig","Used to initialize the [`Skeleton`] with its initial parameters"]]});

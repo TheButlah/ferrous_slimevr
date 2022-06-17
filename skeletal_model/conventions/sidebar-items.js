@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["forward_vec","A vector in the “forward” or `-Z` direction"],["right_vec","A vector in the “right” or `+X` direction"],["up_vec","A vector in the “up” or `+Y` direction"]]});

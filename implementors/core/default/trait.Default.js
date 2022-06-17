@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["skeletal_model"] = [{"text":"impl&lt;T:&nbsp;<a class=\"trait\" href=\"https://doc.rust-lang.org/1.61.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a>&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.61.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"skeletal_model/bone/struct.BoneMap.html\" title=\"struct skeletal_model::bone::BoneMap\">BoneMap</a>&lt;T&gt;","synthetic":false,"types":["skeletal_model::bone::bone_map::BoneMap"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

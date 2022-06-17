@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["skeletal_model"] = [{"text":"impl <a class=\"trait\" href=\"https://docs.rs/num-traits/0.2/num_traits/cast/trait.ToPrimitive.html\" title=\"trait num_traits::cast::ToPrimitive\">ToPrimitive</a> for <a class=\"enum\" href=\"skeletal_model/bone/enum.BoneKind.html\" title=\"enum skeletal_model::bone::BoneKind\">BoneKind</a>","synthetic":false,"types":["skeletal_model::bone::bone_kind::BoneKind"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
