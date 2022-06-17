@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["BoneKind","`BoneKind` describes the fixed relationship between the various types of bones, as well as static, compile-time information about them such as their parents/children, their calibration pose, etc."]],"struct":[["BoneMap","Provides a map of `BoneKind` -> `T`. Every possible `BoneKind` must have a corresponding value."]],"type":[["Point",""],["Translation",""],["UnitQuat",""]]});
+initSidebarItems({"enum":[["BoneKind","Describes the various types of bones in the skeleton."]],"type":[["Point",""],["Translation",""],["UnitQuat",""]]});

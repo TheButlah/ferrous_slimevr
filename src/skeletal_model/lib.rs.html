@@ -69,6 +69,14 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
 </pre><pre class="rust"><code><span class="doccomment">//! An experimental skeletal model for full body tracking (FBT) in VR.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Documentation for contributors is available [here][internal rustdoc].</span>
@@ -77,12 +85,13 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! [internal rustdoc]: https://thebutlah.github.io/ferrous_slimevr/skeletal_model</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! # Overview</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This crate provides a well documented, high performance, and very robust model of</span>
 <span class="doccomment">//! a human&#39;s pose for the purpose of full body tracking in VR. The role of this crate</span>
 <span class="doccomment">//! is to ingest partially complete human pose data, often from SlimeVR or Vive</span>
-<span class="doccomment">//! trackers, and compute the missing pose pose data. This gives applications a way of</span>
+<span class="doccomment">//! trackers, and compute the missing pose data. This gives applications a way of</span>
 <span class="doccomment">//! accessing that pose data.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This is accomplished via a simple forward-kinematics solver, which also accounts for</span>
@@ -94,6 +103,7 @@
 <span class="doccomment">//! [java server]: https://github.com/SlimeVR/SlimeVR-Server/</span>
 <span class="doccomment">//! [SlimeVR]: https://github.com/SlimeVR/</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! # Tracker support</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Typically, there are two types of full body trackers:</span>
@@ -101,8 +111,9 @@
 <span class="doccomment">//! - **&quot;6DoF&quot;**: Any tracker with both positional and rotational data. Example: Vive</span>
 <span class="doccomment">//!   trackers.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! This crate is agnostic to the particular tracker hardware or protocol, as reading</span>
-<span class="doccomment">//! the data from the tracker is beyond the scope of this crate. Simply provide position</span>
+<span class="doccomment">//! As long as you can provide position and/or rotation for some bones, this crate</span>
+<span class="doccomment">//! should do the rest.</span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Scope</span>
 <span class="doccomment">//!</span>
@@ -124,7 +135,12 @@
 <span class="doccomment">//! see the [`conventions`] module.</span>
 
 <span class="comment">// These set linter options</span>
-<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">rustdoc::broken_intra_doc_links</span>)]</span>
+<span class="attribute">#![<span class="ident">deny</span>(
+    <span class="ident">rustdoc::broken_intra_doc_links</span>,
+    <span class="ident">invalid_doc_attributes</span>,
+    <span class="ident">unused_import_braces</span>,
+    <span class="ident">unused</span>
+)]</span>
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">bone</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">conventions</span>;

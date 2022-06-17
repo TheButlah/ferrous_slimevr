@@ -57,6 +57,7 @@
 <span id="52">52</span>
 <span id="53">53</span>
 <span id="54">54</span>
+<span id="55">55</span>
 </pre><pre class="rust"><code><span class="doccomment">//! This module describes the mathematical conventions we adopt throughout the skeletal</span>
 <span class="doccomment">//! model.</span>
 <span class="doccomment">//!</span>
@@ -108,6 +109,7 @@
         <span class="kw">let</span> <span class="ident">euler</span> <span class="op">=</span> <span class="ident">UnitQuat::from_euler_angles</span>(<span class="number">0.</span>, <span class="op">-</span><span class="ident">FRAC_PI_2</span>, <span class="number">0.</span>);
         <span class="kw">let</span> <span class="ident">matrix</span> <span class="op">=</span> <span class="ident">UnitQuat::look_at_rh</span>(<span class="kw-2">&amp;</span><span class="op">-</span><span class="ident">Vector3::y_axis</span>(), <span class="kw-2">&amp;</span><span class="op">-</span><span class="ident">Vector3::z_axis</span>());
 
+        <span class="comment">// TODO: why does this fail?</span>
         <span class="macro">assert_relative_eq!</span>(<span class="ident">euler</span>, <span class="ident">matrix</span>);
     }
 }

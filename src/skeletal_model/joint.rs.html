@@ -38,17 +38,25 @@
 <span id="33">33</span>
 <span id="34">34</span>
 <span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// Joints represent the pivot points of [`Edge`]s in the skeleton.</span>
 <span class="doccomment">/// `Joint`s have positions, but not rotations.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// For more information, see the [`skeleton`](crate::skeleton) module.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Joint</span> {
     <span class="doccomment">/// Input position in global space. If it is unconstrained, it is `None`.</span>
     <span class="ident">input_pos_g</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Global</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     <span class="doccomment">/// The output position of the Joint. Solving the skeleton updates this.</span>
     <span class="ident">output_pos_g</span>: <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">Point</span><span class="op">&gt;</span>,
 }
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Joint</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {

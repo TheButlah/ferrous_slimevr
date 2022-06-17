@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["_IMPL_NUM_FromPrimitive_FOR_BoneKind",""],["_IMPL_NUM_ToPrimitive_FOR_BoneKind",""]],"enum":[["BoneKind","`BoneKind` describes the fixed relationship between the various types of bones, as well as static, compile-time information about them such as their parents/children, their calibration pose, etc."]]});
+initSidebarItems({"constant":[["_IMPL_NUM_FromPrimitive_FOR_BoneKind",""],["_IMPL_NUM_ToPrimitive_FOR_BoneKind",""]],"enum":[["BoneKind","Describes the various types of bones in the skeleton."]]});

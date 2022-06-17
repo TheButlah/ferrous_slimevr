@@ -167,6 +167,13 @@
 <span id="162">162</span>
 <span id="163">163</span>
 <span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">super</span>::BoneKind</span>;
 
 <span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Index</span>, <span class="ident">IndexMut</span>};
@@ -185,14 +192,12 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// # use skeletal_model::bone::{BoneMap, BoneKind};</span>
-<span class="doccomment">/// let mut m = BoneMap::new([-1; BoneKind::num_types()]);</span>
-<span class="doccomment">/// let mut i = 0;</span>
+<span class="doccomment">/// let mut m = BoneMap::default();</span>
 <span class="doccomment">/// for b in BoneKind::iter() {</span>
-<span class="doccomment">///     m[b] = i;</span>
-<span class="doccomment">///     i += 1;</span>
+<span class="doccomment">///     m[b] = format!(&quot;this is a {b:?}&quot;);</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// assert_eq!(m[BoneKind::Chest], 1)</span>
+<span class="doccomment">/// assert_eq!(m[BoneKind::Chest], format!(&quot;this is a {:?}&quot;, BoneKind::Chest))</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">From</span>, <span class="ident">Eq</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BoneMap</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>([<span class="ident">T</span>; <span class="ident">BoneKind::num_types</span>()]);
@@ -201,14 +206,23 @@
         <span class="self">Self</span>(<span class="ident">map</span>)
     }
 
+    <span class="doccomment">/// Gets an iterator over the (key, value) pairs of the `BoneMap`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Iteration is guaranteed to start at [`BoneKind::root()`] but beyond that,</span>
+    <span class="doccomment">/// iteration order is not guaranteed. However, iteration *is* exhaustive over</span>
+    <span class="doccomment">/// the various kinds of bones.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Iter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">into_iter</span>()
     }
 
+    <span class="doccomment">/// Gets a mutable iterator over the `(key, value)` pairs of the `BoneMap`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// See also: [`Self::iter()`]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">IterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">into_iter</span>()
     }
 
+    <span class="doccomment">/// Applies a function to each element of the `BoneMap`, mapping it from `T` to `U`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">map</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>(<span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">BoneKind</span>, <span class="ident">T</span>) -&gt; <span class="ident">U</span>) -&gt; <span class="ident">BoneMap</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">it</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">kind</span>, <span class="ident">item</span>)<span class="op">|</span> (<span class="ident">kind</span>, <span class="ident">f</span>(<span class="ident">kind</span>, <span class="ident">item</span>)));
         <span class="ident">it</span>.<span class="ident">try_collect</span>().<span class="ident">unwrap</span>()

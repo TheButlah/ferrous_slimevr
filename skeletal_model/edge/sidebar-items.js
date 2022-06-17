@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["EdgeKind","The different kinds of edges."]],"struct":[["Edge","`Edge`s represent the connections between the [`Joint`]s of the skeleton. Edges have a global rotation, represented as a unit quaternion. To get an edge’s position, you can get the position of either of its two attached `Joint`s."]]});
+initSidebarItems({"enum":[["EdgeKind","The different kinds of edges."]],"struct":[["Edge","`Edge`s represent the connections between the [`Joint`]s of the skeleton."]]});

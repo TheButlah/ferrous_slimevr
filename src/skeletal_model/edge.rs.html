@@ -80,6 +80,10 @@
 <span id="75">75</span>
 <span id="76">76</span>
 <span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">derive_more::From</span>;
@@ -97,7 +101,9 @@
 }
 
 <span class="doccomment">/// `Edge`s represent the connections between the [`Joint`]s of the</span>
-<span class="doccomment">/// skeleton. Edges have a global rotation, represented as a unit quaternion. To</span>
+<span class="doccomment">/// skeleton.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Edges have a global rotation, represented as a unit quaternion. To</span>
 <span class="doccomment">/// get an edge&#39;s position, you can get the position of either of its two attached</span>
 <span class="doccomment">/// `Joint`s.</span>
 <span class="doccomment">///</span>
@@ -105,6 +111,8 @@
 <span class="doccomment">/// skeleton. So the head of the bone would also be the tail of a bone closer to the</span>
 <span class="doccomment">/// top of the skeleton. This is simply to give the parent and child of a bone a</span>
 <span class="doccomment">/// consistent meaning.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// For more information, see the [`skeleton`](crate::skeleton) module.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Edge</span> {
     <span class="ident">kind</span>: <span class="ident">EdgeKind</span>,
     <span class="doccomment">/// Input rotation in global space. If it is unconstrained, it is `None`.</span>

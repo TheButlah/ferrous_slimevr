@@ -13,15 +13,17 @@
 <span id="8">8</span>
 <span id="9">9</span>
 <span id="10">10</span>
+<span id="11">11</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Contains skeletal bones and their relationships.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! For more info about skeletal bones and the role it plays in the skeleton,</span>
+<span class="doccomment">//! For more info about skeletal bones and the role they play in the skeleton,</span>
 <span class="doccomment">//! see the module-level documentation on [`crate::skeleton`].</span>
 
 <span class="kw">mod</span> <span class="ident">bone_kind</span>;
-<span class="kw">mod</span> <span class="ident">bone_map</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">bone_map</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::bone_kind::BoneKind</span>;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">inline</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::bone_map::BoneMap</span>;
 </code></pre></div>
 </section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="skeletal_model" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0 (fe5b13d68 2022-05-18)" ></div>

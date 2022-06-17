@@ -149,14 +149,67 @@
 <span id="144">144</span>
 <span id="145">145</span>
 <span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">num_derive</span>::{<span class="ident">FromPrimitive</span>, <span class="ident">ToPrimitive</span>};
 <span class="kw">use</span> <span class="ident">num_traits::FromPrimitive</span>;
 
-<span class="doccomment">/// `BoneKind` describes the fixed relationship between the various types of bones, as</span>
-<span class="doccomment">/// well as static, compile-time information about them such as their parents/children,</span>
-<span class="doccomment">/// their calibration pose, etc.</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">rustdoc::private_intra_doc_links</span>)]</span>
+<span class="doccomment">/// Describes the various types of bones in the skeleton.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// All of this information is static rather than dynamic information. &quot;Static&quot; here</span>
+<span class="doccomment">/// refers to information that does not change - this information is &quot;hard coded&quot;.</span>
+<span class="doccomment">/// This includes:</span>
+<span class="doccomment">/// - The parent/child relationships between the various types of bones</span>
+<span class="doccomment">/// - The pose of the bones when performing a calibration</span>
+<span class="doccomment">/// - Names of the bones</span>
+<span class="doccomment">/// - Etc</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Where possible, this information is provided as [`const`] functions so that they</span>
+<span class="doccomment">/// can be evaluated at compile-time.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// There is also dynamic information associated with bones. &quot;Dynamic&quot; here refers to</span>
+<span class="doccomment">/// the fact that some bone data cannot be known up front and changes as the skeletal</span>
+<span class="doccomment">/// model receives inputs and produces outputs. This data is stored in the</span>
+<span class="doccomment">/// [`Skeleton`](crate::Skeleton) as an [`Edge`](crate::edge::Edge).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// `BoneKind` is also represented as a `u8`, so it can be used as an index for an</span>
+<span class="doccomment">/// array. This is used for example in [`BoneMap`]. **Please note that we make no</span>
+<span class="doccomment">/// stability guarantees for the particular value that any variant gets, only that</span>
+<span class="doccomment">/// these values are contiguous and start at 0.** Use the variant directly or refer to</span>
+<span class="doccomment">/// the various functions implemented on this type for stability.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`const`]: https://doc.rust-lang.org/std/keyword.const.html</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">u8</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">PartialEq</span>, <span class="ident">FromPrimitive</span>, <span class="ident">ToPrimitive</span>)]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
@@ -180,30 +233,36 @@
     <span class="ident">WristR</span>,
 }
 <span class="kw">impl</span> <span class="ident">BoneKind</span> {
-    <span class="doccomment">/// The `BoneKind` with the largest integer value</span>
+    <span class="doccomment">/// The bone with the largest integer value</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">max</span>() -&gt; <span class="ident">BoneKind</span> {
         <span class="ident">BoneKind::WristR</span>
     }
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MAX</span>: <span class="ident">BoneKind</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::max</span>();
 
-    <span class="doccomment">/// The `BoneKind` with the smallest integer value</span>
+    <span class="doccomment">/// The bone with the smallest integer value</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">min</span>() -&gt; <span class="ident">BoneKind</span> {
         <span class="ident">BoneKind::root</span>()
     }
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MIN</span>: <span class="ident">BoneKind</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::min</span>();
 
-    <span class="doccomment">/// The root bone type.</span>
+    <span class="doccomment">/// The root bone of the skeletal graph/tree.</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">root</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::Neck</span>
     }
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ROOT</span>: <span class="ident">BoneKind</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::root</span>();
 
-    <span class="doccomment">/// Returns the number of different types of bones.</span>
+    <span class="doccomment">/// Returns the number of unique kinds of bones. This is equivalent to the number</span>
+    <span class="doccomment">/// of variants in `BoneKind`</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">num_types</span>() -&gt; <span class="ident">usize</span> {
         <span class="ident">BoneKind::max</span>() <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>
     }
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NUM_TYPES</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::num_types</span>();
 
+    <span class="doccomment">/// Returns the children of any particular bone.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The slice is `&#39;static`, which means the lifetime of the returned slice lives</span>
+    <span class="doccomment">/// for the entire duration of the program. This is because the parent/child</span>
+    <span class="doccomment">/// relationship of bones is known at compile-time.</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">children</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="self">Self</span>] {
         <span class="kw">use</span> <span class="ident">BoneKind</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="self">self</span> {
@@ -227,6 +286,7 @@
         }
     }
 
+    <span class="doccomment">/// The parent of a bone.</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">parent</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BoneKind</span><span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">BoneKind</span>::<span class="kw-2">*</span>;
         <span class="prelude-val">Some</span>(<span class="kw">match</span> <span class="self">self</span> {
