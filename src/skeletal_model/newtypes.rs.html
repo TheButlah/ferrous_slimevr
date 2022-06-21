@@ -45,7 +45,7 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// A newtype on `T` that indicates that it is a global transform.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Default</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">private::Sealed</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">T</span>);
 
 <span class="doccomment">/// Implements `From&lt;T&gt; for $ident&lt;T&gt;`</span>
@@ -62,7 +62,7 @@
 <span class="macro">impl_helper!</span>(<span class="ident">Local</span>);
 
 <span class="doccomment">/// A newtype on `T` that indicates that it is a local transform.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Default</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Local</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">private::Sealed</span><span class="op">&gt;</span>(<span class="kw">pub</span> <span class="ident">T</span>);
 
 <span class="kw">mod</span> <span class="ident">private</span> {
