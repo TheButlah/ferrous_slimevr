@@ -86,6 +86,7 @@
 <span id="81">81</span>
 <span id="82">82</span>
 <span id="83">83</span>
+<span id="84">84</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">derive_more::From</span>;
@@ -98,7 +99,8 @@
     <span class="doccomment">/// Represents a tracker that is providing pose information as an input to the</span>
     <span class="doccomment">/// skeleton.</span>
     <span class="ident">InputTracker</span>,
-    <span class="doccomment">/// Represents a computed/synthetic tracker that will act as a</span>
+    <span class="doccomment">/// Represents a computed/synthetic tracker that will act as an output tracker for</span>
+    <span class="doccomment">/// the skeleton.</span>
     <span class="ident">OutputTracker</span>,
 }
 
