@@ -100,16 +100,16 @@
     <span class="ident">OutputTracker</span>,
 }
 
-<span class="doccomment">/// `Edge`s represent the connections between the [`Joint`]s of the</span>
+<span class="doccomment">/// `Edge`s represent the connections between the [`Node`]s of the</span>
 <span class="doccomment">/// skeleton.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Edges have a global rotation, represented as a unit quaternion. To</span>
 <span class="doccomment">/// get an edge&#39;s position, you can get the position of either of its two attached</span>
-<span class="doccomment">/// `Joint`s.</span>
+<span class="doccomment">/// `Node`s.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// Note that by convention, the directionality of bones points towards the top of the</span>
-<span class="doccomment">/// skeleton. So the head of the bone would also be the tail of a bone closer to the</span>
-<span class="doccomment">/// top of the skeleton. This is simply to give the parent and child of a bone a</span>
+<span class="doccomment">/// Note that by convention, the directionality of edges points towards the top of the</span>
+<span class="doccomment">/// skeleton. So the head of the edge would also be the tail of an edge closer to the</span>
+<span class="doccomment">/// top of the skeleton. This is simply to give the parent and child of an edge a</span>
 <span class="doccomment">/// consistent meaning.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// For more information, see the [`skeleton`](crate::skeleton) module.</span>
@@ -117,12 +117,12 @@
     <span class="ident">kind</span>: <span class="ident">EdgeKind</span>,
     <span class="doccomment">/// Input rotation in global space. If it is unconstrained, it is `None`.</span>
     <span class="ident">input_rot_g</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Global</span><span class="op">&lt;</span><span class="ident">UnitQuat</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Rotation of the bone with respect to the parent bone at calibration time. Maps</span>
-    <span class="doccomment">/// from parent frame to child frame.</span>
+    <span class="doccomment">/// Local rotation of the edge with respect to the parent edge at calibration time.</span>
+    <span class="doccomment">/// Maps from parent frame to child frame.</span>
     <span class="ident">calib_rot_l</span>: <span class="ident">Local</span><span class="op">&lt;</span><span class="ident">UnitQuat</span><span class="op">&gt;</span>,
-    <span class="doccomment">/// Length of the bone. May be set by the user, or may be computed at calibration.</span>
+    <span class="doccomment">/// Length of the edge. May be set by the user, or may be computed at calibration.</span>
     <span class="ident">length</span>: <span class="ident">f32</span>,
-    <span class="doccomment">/// The output rotation of the bone. Solving the skeleton updates this.</span>
+    <span class="doccomment">/// The output rotation of the edge. Solving the skeleton updates this.</span>
     <span class="ident">output_rot_g</span>: <span class="ident">Global</span><span class="op">&lt;</span><span class="ident">UnitQuat</span><span class="op">&gt;</span>,
 }
 <span class="kw">impl</span> <span class="ident">Edge</span> {

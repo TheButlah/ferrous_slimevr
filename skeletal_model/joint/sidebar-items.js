@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Joint","Joints represent the pivot points of [`Edge`]s in the skeleton. `Joint`s have positions, but not rotations."]]});
