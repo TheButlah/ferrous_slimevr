@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Skeleton",""],["SkeletonConfig","Used to initialize the [`Skeleton`] with its initial parameters"]]});
+initSidebarItems({"mod":[["edge",""],["node",""]],"struct":[["Skeleton","The `Skeleton` provides a way of reading, writing, and solving for the pose of a human wearing FBT."],["SkeletonConfig","Used to initialize the [`Skeleton`] with its initial parameters"]]});

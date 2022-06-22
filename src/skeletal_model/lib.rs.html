@@ -77,7 +77,6 @@
 <span id="72">72</span>
 <span id="73">73</span>
 <span id="74">74</span>
-<span id="75">75</span>
 </pre><pre class="rust"><code><span class="doccomment">//! An experimental skeletal model for full body tracking (FBT) in VR.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Documentation for contributors is available [here][internal rustdoc].</span>
@@ -99,9 +98,9 @@
 <span class="doccomment">//! positional constraints from positional trackers, if any are present.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This crate was both inspired by and written for use in [SlimeVR], and hopes to be a</span>
-<span class="doccomment">//! better version of the current skeletal model implemented in the [java server].</span>
+<span class="doccomment">//! better version of the current skeletal model implemented in the [Java server].</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! [java server]: https://github.com/SlimeVR/SlimeVR-Server/</span>
+<span class="doccomment">//! [Java server]: https://github.com/SlimeVR/SlimeVR-Server/</span>
 <span class="doccomment">//! [SlimeVR]: https://github.com/SlimeVR/</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!</span>
@@ -121,7 +120,7 @@
 <span class="doccomment">//! It is important to note that this crate is *only* the skeletal model, and does not</span>
 <span class="doccomment">//! handle networking or anything else necessary for actually reading tracker data. It</span>
 <span class="doccomment">//! also does not expose any networked way of acessing the outputs of the skeleton. This</span>
-<span class="doccomment">//! enables applications to then build on top of this crate, either through a rust</span>
+<span class="doccomment">//! enables applications to then build on top of this crate, either through a Rust</span>
 <span class="doccomment">//! implementation of the SlimeVR server, or by calling this library via any of the</span>
 <span class="doccomment">//! various language bindings we hope to add soon. We hope that this will enable the</span>
 <span class="doccomment">//! SlimeVR community, as well as other full body tracking solutions, to build on our</span>
@@ -140,15 +139,14 @@
 <span class="attribute">#![<span class="ident">deny</span>(
     <span class="ident">invalid_doc_attributes</span>,
     <span class="ident">rustdoc::broken_intra_doc_links</span>,
+    <span class="ident">rustdoc::private_intra_doc_links</span>,
     <span class="ident">unused_import_braces</span>,
     <span class="ident">unused</span>
 )]</span>
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">bone</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">conventions</span>;
-<span class="kw">mod</span> <span class="ident">edge</span>;
 <span class="kw">mod</span> <span class="ident">newtypes</span>;
-<span class="kw">mod</span> <span class="ident">node</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prelude</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">skeleton</span>;
 
