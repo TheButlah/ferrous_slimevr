@@ -69,6 +69,12 @@
 //! # The Skeletal Solver
 //! TODO: We will document this soon
 
+mod edge;
+mod node;
+
+pub(crate) use edge::Edge;
+pub(crate) use node::Node;
+
 use crate::prelude::*;
 
 use core::ops::Index;

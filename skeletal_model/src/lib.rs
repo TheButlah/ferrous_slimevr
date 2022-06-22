@@ -67,9 +67,7 @@
 
 pub mod bone;
 pub mod conventions;
-mod edge;
 mod newtypes;
-mod node;
 pub mod prelude;
 pub mod skeleton;
 
