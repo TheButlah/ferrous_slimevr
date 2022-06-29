@@ -4,7 +4,7 @@
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../skeletal_model/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"><a href="#">Module skeleton</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li></ul></div></section><div id="sidebar-vars" data-name="skeleton" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../skeletal_model/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Module <a href="../index.html">skeletal_model</a>::<wbr><a class="mod" href="#">skeleton</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/skeletal_model/skeleton/mod.rs.html#1-182">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The skeleton, and its representation as a graph data structure.</p>
+    <h1 class="fqn"><span class="in-band">Module <a href="../index.html">skeletal_model</a>::<wbr><a class="mod" href="#">skeleton</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../src/skeletal_model/skeleton/mod.rs.html#1-210">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The skeleton, and its representation as a graph data structure.</p>
 <p>The bread and butter of the skeletal model is the <a href="struct.Skeleton.html" title="Skeleton"><code>Skeleton</code></a>, which models the
 pose of a human. The skeleton is comprised of various bones and joints, and there
 are trackers that get “attached” to the skeleton that represent the trackers worn
@@ -65,7 +65,33 @@ calibration time for tracker edges.</li>
 will be solved for.</li>
 </ul>
 <h2 id="the-skeletal-solver"><a href="#the-skeletal-solver">The Skeletal Solver</a></h2>
-<p>TODO: We will document this soon</p>
+<p>The goal of the skeletal model is to take the input data (positions and rotations),
+and compute output data (positions and rotations).</p>
+<p>To accomplish this, the solver starts at any nodes with known positions and performs
+“<a href="https://en.wikipedia.org/wiki/Graph_traversal#Breadth-first_search">breadth-first search</a>” (BFS), expanding  “outward” from the known positions.
+As the traversal proceeds, it uses any known input positions or rotations to compute
+the output positions or rotations, step by step.</p>
+<p>Here is a breakdown of exactly how the outputs are computed from the inputs, at
+each step of the traversal:</p>
+<h5 id="edge-1"><a href="#edge-1">Edge</a></h5>
+<ul>
+<li>If there is an input rotation, copy it to the output rotation</li>
+<li>If there is no input rotation, output the calibration rotation</li>
+</ul>
+<h5 id="node-1"><a href="#node-1">Node</a></h5>
+<ul>
+<li>If there is an input position, copy it to the output position</li>
+<li>If there is no input position, use the previous edge’s rotation and length to
+compute the output position</li>
+</ul>
+<h3 id="handling-equidistant-nodes"><a href="#handling-equidistant-nodes">Handling Equidistant Nodes</a></h3>
+<p>In some cases, a node that needs its output position computed, will be equidistant
+to two or more other nodes in the graph. In this case, due to small errors and
+inconsistencies of the actual global positions, this node will have a different
+output position depending on which of the nodes reaches it first. To avoid a
+scenario where the value switches between different outputs, a canonical order is
+used for the nodes. This order is unspecified, but guaranteed not to change until
+new input trackers are added/removed.</p>
 </div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="edge/index.html" title="skeletal_model::skeleton::edge mod">edge</a><span title="Restricted Visibility">&nbsp;🔒</span> </div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="node/index.html" title="skeletal_model::skeleton::node mod">node</a><span title="Restricted Visibility">&nbsp;🔒</span> </div><div class="item-right docblock-short"></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Skeleton.html" title="skeletal_model::skeleton::Skeleton struct">Skeleton</a></div><div class="item-right docblock-short"><p>The <code>Skeleton</code> provides a way of reading, writing, and solving for the pose of
