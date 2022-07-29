@@ -1,5 +1,5 @@
 # THIS PROJECT HAS MOVED TO THE MAIN SLIMEVR ORGANIZATION!
-https://github.com/SlimeVR/SlimeVR-Overlay
+https://github.com/SlimeVR/SlimeVR-Rust
 
 A Rust implementation of [SlimeVR](https://github.com/SlimeVR)
 
